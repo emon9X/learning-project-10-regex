@@ -71,14 +71,11 @@ And some examples that would not match:
 // \s: Find a whitespace character.
 // \S: Find a non-whitespace character.
 
-// \b: word boundary. Find a match at the beginning/end of a word, beginning like this: \bHI, ending like this: HI\b. It also returns full matching word.
-// \bdo : dondo do ndon, returns match before n and single do (beginning boundary)
-// do\b: dondo do ndon, returns match after n and single do (ending boundary)
-// \bdo\b: dondo do ndon, returns only single do. 
-// \B: kind of opposite of \b.
-// \Bdo: dondo do ndon, returns ending do and middle do.
-// do\B: dondo do ndon, returns starting don and middle do.
-// \Bdo\B: dondo do ndon, returns only middle do.
+// \B: Matches any position that is not a word boundary. This matches a position, not a character.
+// \b: Matches a word boundary position between a word character and non-word character or position (start / end of string). 
+// \bs: beginning.
+// s\b: ending.
+
 
 {
     const regex = /Hello\n d World/;
@@ -89,4 +86,42 @@ And some examples that would not match:
     console.log(str.match(/\n/));
     console.log("hello\fworld");
 
+}
+
+//Quantifiers
+// a+ --> match one or more of the preceeding token
+// /a/ vs /a+/
+// text = a aa aaa
+// /a/ only returns a
+// /a+/ returns a , aa, aaa
+
+///a\w+/: mathces any word or word segment with preeceding characters. In this case preceeding character is 'a'. I doesn't returns single character.
+
+//a* --> match zero or more of the preceeding token
+//warning: this can return empty matches.
+//a\w*: mathces any word or word segment with preeceding characters. In this case preceeding character is 'a'. I does return single character.
+
+//a? --> match zero or one of the preceeding token
+//a\w?: this return token character itself and another one character with preceeding token
+
+//a{X}: Matches any string that contains a sequence of exactly X occurrences of a
+//n{X,Y}: Matches any string that contains a sequence of **`X`** to **`Y`** occurrences of **`n`**.
+//n{X,}: Matches any string that contains a sequence of at least **`X`** occurrences of **`n`**.
+
+// a$: Matches the end of the string, or the end of a line if the multiline flag (m) is enabled. This matches a position, not a character.
+//^a: Matches the beginning of the string, or the beginning of a line if the multiline flag (m) is enabled. This matches a position, not a character.
+
+// string(?=string): Positive Lookahead - Matches any string that is followed by a specific string 
+
+{
+    let text = "zniceaab";
+    console.log(text.match(/nice(?=a)/));
+}
+
+// string(?!string): Negative lookahead -  Negative Lookahead - Matches any string that is not followed by a specific string
+
+{
+    let text = "bnicea";
+    console.log(text.match(/nice(?!a)/)) //null
+    console.log(text.match(/nic(?!a)/)) //null
 }
