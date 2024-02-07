@@ -123,5 +123,5 @@ And some examples that would not match:
 {
     let text = "bnicea";
     console.log(text.match(/nice(?!a)/)) //null
-    console.log(text.match(/nic(?!a)/)) //null
+    console.log(text.match(/nic(?!a)/)) //nic
 }
